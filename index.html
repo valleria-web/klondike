@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klondike</title>
+
+    <script src="tableau.js"></script>
+    <!-- Importa el archivo tableau.js -->
+  </head>
+  <body>
+    <h1>Klondike</h1>
+    <pre id="json-output"></pre>
+
+    <!-- Div para el objeto Klondike -->
+    <div id="klondike">
+      Klondike
+      <!-- Div para el objeto Stock -->
+      <div id="stock">Stock</div>
+
+      <!-- Div para el objeto Waste -->
+      <div id="waste">Waste</div>
+
+      <!-- Div para el objeto Foundation -->
+      <div id="foundation"></div>
+
+      <!-- Divs individuales para los Foundations (0 a 3) -->
+      <div id="foundation0">foundation0</div>
+      <div id="foundation1">foundation1</div>
+      <div id="foundation2">foundation2</div>
+      <div id="foundation3">foundation3</div>
+
+      <!-- Div para el objeto Tableaus -->
+      <div id="tableaus">
+        <!-- Divs individuales para los Tableaus (0 a 6) -->
+        <div id="tableau0">tableau0</div>
+        <div id="tableau1">tableau1</div>
+        <div id="tableau2">tableau2</div>
+        <div id="tableau3">tableau3</div>
+        <div id="tableau4">tableau4</div>
+        <div id="tableau5">tableau5</div>
+        <div id="tableau6">tableau6</div>
+      </div>
+    </div>
+
+    <!-- Div para el objeto Player -->
+    <div id="player"></div>
+
+    <script>
+      // JSON del juego Klondike
+      const klondikeData = {
+        Klondike: {
+          Stock: [],
+          Waste: [],
+          Foundation: {
+            suit: null,
+            cards: [],
+          },
+          Foundations: [
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+          ],
+          Tableaus: [[], [], [], [], [], [], []],
+          Player: {
+            name: "",
+            score: 0,
+          },
+        },
+      };
+
+      // Convierte el JSON a una cadena legible
+      const jsonOutput = JSON.stringify(klondikeData);
+
+      // Muestra el JSON en la página
+      document.getElementById("json-output").textContent = jsonOutput;
+    </script>
+    <script type="module" src="stock.js"></script>
+  </body>
+</html>

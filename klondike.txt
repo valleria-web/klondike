@@ -1,0 +1,37 @@
+                             ,---------------------------.              
+                             |Klondike                   |              
+                             |---------------------------|              
+                             |- Stock: Card[]            |              
+                             |- Waste: Card[]            |              
+                             |- Tableaus: Card[][]       |              
+                             |- Foundation: Foundation   |              
+                             |- Foundations: Foundation[]|              
+                             |                           |              
+                             |+ shuffleStock()           |              
+                             |+ dealInitialCards()       |              
+                             |+ drawCardFromStock()      |              
+                             |+ moveCardToTableau()      |              
+                             |+ moveCardToFoundation()   |              
+                             |+ resetGame()              |              
+                             |+ checkVictory()           |              
+                             `---------------------------'              
+                                                                        
+                                                                        
+                               ,------------------------.               
+                               |Player                  |               
+           ,---------------.   |------------------------|               
+           |Foundation     |   |- name: String          |  ,-----------.
+           |---------------|   |- score: Number         |  |Foundations|
+           |- suit: String |   |                        |  |-----------|
+           |- cards: Card[]|   |+ playCard()            |  `-----------'
+           `---------------'   |+ moveCardToFoundation()|               
+                               |+ restartGame()         |               
+                               `------------------------'               
+                                                                        
+,------------------------.                                              
+|Card                    |                                              
+|------------------------|                                              
+|- suit: String          |                                              
+|- value: String | Number|
+|- isFaceUp: boolean     |                                              
+`------------------------'                                              
