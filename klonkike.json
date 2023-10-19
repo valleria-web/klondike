@@ -1,4 +1,4 @@
-//estado inicial de un juego Klondike:
+//estado inicial de un juego Klondike: version: 1
 {
     "Klondike": {
       "Stock": [],

@@ -5,6 +5,27 @@ class Card {
     this.value = value;
     this.isFaceUp = isFaceUp;
   }
+
+  // Método para voltear una carta boca arriba
+  flip() {
+    this.isFaceUp = !this.isFaceUp;
+  }
+
+  // Método para verificar si esta carta puede apilarse sobre otra
+  canStackOn(targetCard) {
+    // Implementa las reglas específicas de Klondike aquí.
+    // Verifica si las cartas tienen colores opuestos y si el valor de la carta actual
+    // es una unidad menor que el valor de la carta objetivo.
+    const colorOpposite =
+      (this.suit === 'Hearts' || this.suit === 'Diamonds') &&
+      (targetCard.suit === 'Clubs' || targetCard.suit === 'Spades') ||
+      (this.suit === 'Clubs' || this.suit === 'Spades') &&
+      (targetCard.suit === 'Hearts' || targetCard.suit === 'Diamonds');
+
+    const valueOneLess = values.indexOf(this.value) === values.indexOf(targetCard.value) - 1;
+
+    return colorOpposite && valueOneLess;
+  }
 }
 
 // Define un array de objetos que representan las cartas
@@ -50,9 +71,25 @@ function shuffleStock(deck) {
 // Llama a la función para barajar el mazo
 shuffleStock(cards);
 
-// Importa la función y la matriz de tableaus desde tableau.js
-import { repartirCartasEnTableaus, tableaus } from "./tableau.js";
 
+// Función para repartir cartas a los 7 tableaus según las reglas de Klondike
+function repartirCartasEnTableaus(tableaus, stock) {
+  let cartaActual = 0;
+  for (let i = 0; i < tableaus.length; i++) {
+    for (let j = 0; j <= i; j++) {
+      if (cartaActual < stock.length) {
+        tableaus[i].push(stock[cartaActual]);
+        cartaActual++;
+      }
+    }
+  }
+  // Elimina las cartas del stock
+  stock.splice(0, cartaActual);
+}
+  
+  // Crea una matriz de 7 tableaus (tableaus vacíos)
+  const tableaus = [[], [], [], [], [], [], []];
+  
 // Llama a la función para repartir las cartas en los 7 tableaus
 repartirCartasEnTableaus(tableaus, cards);
 
