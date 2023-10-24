@@ -1,3 +1,150 @@
+Version 6:
+
+@startuml
+class Klondike {
+  - deck: CardStack
+  - waste: CardStack
+  - foundations: Foundation[]
+  - tableaus: Tableau[]
+  
+  + resetGame()
+  + checkVictory()
+}
+
+class CardStack {
+  - cards: Card[]
+  
+  + moveCardToTableau()
+  + moveCardToFoundation()
+  + shuffleStock()
+  + push(card: Card)
+  + canStackOn(card: Card): boolean
+  + peek(): Card
+  + isEmpty(): boolean
+}
+
+class Card {
+  - suit: String
+  - value: String | Number
+  - isFaceUp: boolean
+  
+  + flip()
+  + canStackOn(targetCard: Card): boolean
+}
+
+class Foundation {
+  - suit: String
+  - cards: CardStack
+  
+  + addCard(card: Card)
+  + isComplete(): boolean
+}
+
+class Tableau {
+  - cards: CardStack
+  
+  + push(card: Card)
+  + flipTopCard()
+  + canMoveTo(targetCard: Card): boolean
+}
+
+Klondike "1" -- "1" CardStack : deck
+Klondike "1" -- "1" CardStack : waste
+Klondike "1" -- "4" Foundation : foundations
+Klondike "1" -- "7" Tableau : tableaus
+
+Tableau "1" -- "1" CardStack : cards
+Foundation "1" -- "1" CardStack : cards
+CardStack "0..*" -- "0..*" Card : cards
+
+@enduml
+
+
+
+
+
+Version 5:
+@startuml
+
+class Klondike {
+  - Stock: CardStack
+  - Waste: CardStack
+  - Foundation: Foundation
+  - Foundations: Foundation[]
+  - Tableaus: CardStack[]
+  - Player: Player
+
+  + resetGame()
+  + checkVictory()
+}
+
+class CardStack {
+  - cards: Card[]
+
+  + push(card: Card)
+  + shuffle()
+  + createDeck()
+}
+
+class Card {
+  - suit: String
+  - value: String | Number
+  - isFaceUp: boolean
+
+  + flip()
+  + canStackOn(targetCard: Card): boolean
+}
+
+class Stock {
+  - cards: Card[]
+
+  + createDeck()
+  + shuffle()
+  + push(card: Card)
+  + canStackOn(card: Card): boolean
+  + peek(): Card
+  + isEmpty(): boolean
+}
+
+
+class Foundation {
+  - suit: String
+  - cards: CardStack
+
+  + addCard(card: Card)
+  + isComplete(): boolean
+}
+
+class Tableau {
+  - cards: Card[]
+
+  + push(card: Card)
+}
+
+
+class Player {
+  - name: String
+  - score: Number
+
+  + playCard()
+  + moveCardToFoundation(foundation: Foundation)
+  + restartGame()
+}
+
+Klondike "1" -- "1" Stock : Contains
+Klondike "1" --> "1" Waste
+Klondike "1" --> "1" Foundation
+Klondike "1" --> "4" Foundations
+Klondike "1" --> "7" Tableaus
+Klondike "1" --> "1" Player
+Foundation "1" --> "1" CardStack
+
+
+@enduml
+
+
+
+
 Version 4: ya con un poco mas de idea sobre que son los objectos y el paradigma poco
 @startuml
 
@@ -246,5 +393,56 @@ Klondike --> Player : Player
 List "1" --> "0..*" Card : cards
 Foundation "1" --> "0..*" Card : cards
 Card --> Suit : suit
+
+@enduml
+
+
+___
+
+
+@startuml
+
+class Klondike {
+  - Stock: Card[]
+  - Waste: Card[]
+  - Tableaus: Card[][]
+  - Foundation: Foundation
+  - Foundations: Foundation[]
+  
+  + shuffleStock()
+  + dealInitialCards()
+  + drawCardFromStock()
+  + moveCardToTableau()
+  + moveCardToFoundation()
+  + resetGame()
+  + checkVictory()
+}
+
+class Card {
+  - suit: String
+  - value: String | Number
+  - isFaceUp: boolean
+}
+
+class Foundation {
+  - suit: String
+  - cards: Card[]
+}
+
+class Player {
+  - name: String
+  - score: Number
+  
+  + playCard()
+  + moveCardToFoundation()
+  + restartGame()
+}
+
+Klondike "1" --> "0..*" Card
+Klondike "1" --> "0..1" Foundation
+Klondike "1" --> "0..4" Foundations
+Foundation "1" --> "0..*" Card
+Klondike "1" --> "1" Player
+Player "1" --> "1" Klondike
 
 @enduml

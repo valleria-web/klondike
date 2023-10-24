@@ -1,0 +1,121 @@
+// JSON del estado inicial del juego Klondike INTENTO 2
+
+const klondikeData = {
+  Klondike: {
+    Stock: new CardStack(),
+    Waste: new CardStack(),
+    Foundation: {
+      suit: null,
+      cards: new CardStack(),
+    },
+    Foundations: [
+      {
+        suit: "Hearts",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Diamonds",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Clubs",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Spades",
+        cards: new CardStack(),
+      },
+    ],
+    Tableaus: [
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+    ],
+    Player: {
+      name: "",
+      score: 0,
+    },
+  },
+};
+
+
+// JSON del estado inicial del juego Klondike INTENTO 1
+      const klondikeData = {
+        Klondike: {
+          Stock: [],
+          Waste: [],
+          Foundation: {
+            suit: null,
+            cards: [],
+          },
+          Foundations: [
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+          ],
+          Tableaus: [[], [], [], [], [], [], []],
+          Player: {
+            name: "",
+            score: 0,
+          },
+        },
+      };
+
+
+Json para la web: NO FUNCIONA
+
+    <script type="module">
+      //      import Card from './Card.js';
+      //      import CardStack from './CardStack.js';
+      //      import Klondike from './Klondike.js';
+      //      import Foundation from './Foundation.js';
+      //      import Player from './Player.js';
+
+      //      // Instancia de la clase Klondike
+      //      const klondikeGame = new Klondike();//
+
+      //      // JSON del juego Klondike
+      //      const klondikeData = {
+      //        Klondike: {
+      //          Stock: klondikeGame.stock.cards,
+      //          Waste: klondikeGame.waste.cards,
+      //          Foundation: {
+      //            suit: klondikeGame.foundation.suit,
+      //            cards: klondikeGame.foundation.cards.cards,
+      //          },
+      //          Foundations: klondikeGame.foundations.map//((foundation) => ({
+      //            suit: foundation.suit,
+      //            cards: foundation.cards.cards,
+      //          })),
+      //          Tableaus: klondikeGame.tableaus.map((tableau) => //tableau.cards),
+      //          Player: {
+      //            name: klondikeGame.player.name,
+      //            score: klondikeGame.player.score,
+      //          },
+      //        },
+      //      };//
+
+      //      // Convierte el JSON a una cadena legible
+      //      const jsonOutput = JSON.stringify(klondikeData, null, 2);//
+
+      //      // Muestra el JSON en la página
+      //      document.getElementById("json-output").textContent = //jsonOutput;
+      //
+    </script>

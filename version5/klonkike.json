@@ -1,0 +1,195 @@
+//JSON del estado inicial del juego Klondike INTENTO 3
+
+{
+  "Klondike": {
+    "Stock": {
+      "cards": []
+    },
+    "Waste": {
+      "cards": []
+    },
+    "Foundation": {
+      "suit": "",
+      "cards": {
+        "cards": []
+      }
+    },
+    "Foundations": [
+      {
+        "suit": "",
+        "cards": {
+          "cards": []
+        }
+      },
+      {
+        "suit": "",
+        "cards": {
+          "cards": []
+        }
+      },
+      {
+        "suit": "",
+        "cards": {
+          "cards": []
+        }
+      },
+      {
+        "suit": "",
+        "cards": {
+          "cards": []
+        }
+      }
+    ],
+    "Tableaus": [
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      },
+      {
+        "cards": []
+      }
+    },
+    "Player": {
+      "name": "",
+      "score": 0
+    }
+  },
+  "CardStack": {
+    "cards": []
+  }
+}
+
+
+
+
+
+//JSON del estado inicial del juego Klondike INTENTO 2
+
+const klondikeData = {
+  Klondike: {
+    Stock: new CardStack(),
+    Waste: new CardStack(),
+    Foundation: {
+      suit: null,
+      cards: new CardStack(),
+    },
+    Foundations: [
+      {
+        suit: "Hearts",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Diamonds",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Clubs",
+        cards: new CardStack(),
+      },
+      {
+        suit: "Spades",
+        cards: new CardStack(),
+      },
+    ],
+    Tableaus: [
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+      new CardStack(),
+    ],
+    Player: {
+      name: "",
+      score: 0,
+    },
+  },
+};
+
+
+// JSON del estado inicial del juego Klondike INTENTO 1
+      const klondikeData = {
+        Klondike: {
+          Stock: [],
+          Waste: [],
+          Foundation: {
+            suit: null,
+            cards: [],
+          },
+          Foundations: [
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+            {
+              suit: null,
+              cards: [],
+            },
+          ],
+          Tableaus: [[], [], [], [], [], [], []],
+          Player: {
+            name: "",
+            score: 0,
+          },
+        },
+      };
+
+
+
+//estado inicial de un juego Klondike: version: 1
+{
+    "Klondike": {
+      "Stock": [],
+      "Waste": [],
+      "Tableaus": [[], [], [], [], [], [], []],
+      "Foundation": {
+        "suit": null,
+        "cards": []
+      },
+      "Foundations": [
+        {
+          "suit": null,
+          "cards": []
+        },
+        {
+          "suit": null,
+          "cards": []
+        },
+        {
+          "suit": null,
+          "cards": []
+        },
+        {
+          "suit": null,
+          "cards": []
+        }
+      ],
+      "Player": {
+        "name": "",
+        "score": 0
+      }
+    }
+  }

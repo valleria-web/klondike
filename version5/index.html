@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>Klondike</title>
-
-    <script src="tableau.js"></script>
-    <!-- Importa el archivo tableau.js -->
   </head>
   <body>
+    <script type="module" src="Stock.js"></script>
+    <script type="module" src="Tableau.js"></script>
+    <script type="module" src="Card.js"></script>
+    <script type="module" src="CardStack.js"></script>
+
     <h1>Klondike</h1>
     <pre id="json-output"></pre>
 
@@ -42,50 +44,9 @@
     </div>
 
     <!-- Div para el objeto Player -->
-    <div id="player"></div>
+    <div id="player">Player/Score</div>
 
-    <script>
-      // JSON del juego Klondike
-      const klondikeData = {
-        Klondike: {
-          Stock: [],
-          Waste: [],
-          Foundation: {
-            suit: null,
-            cards: [],
-          },
-          Foundations: [
-            {
-              suit: null,
-              cards: [],
-            },
-            {
-              suit: null,
-              cards: [],
-            },
-            {
-              suit: null,
-              cards: [],
-            },
-            {
-              suit: null,
-              cards: [],
-            },
-          ],
-          Tableaus: [[], [], [], [], [], [], []],
-          Player: {
-            name: "",
-            score: 0,
-          },
-        },
-      };
+    //
 
-      // Convierte el JSON a una cadena legible
-      const jsonOutput = JSON.stringify(klondikeData);
-
-      // Muestra el JSON en la página
-      document.getElementById("json-output").textContent = jsonOutput;
-    </script>
-    <script type="module" src="stock.js"></script>
   </body>
 </html>

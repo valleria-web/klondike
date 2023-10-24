@@ -1,0 +1,174 @@
+Version 6:
+
+      ,---------------------------.                                                  
+      |Klondike                   |                                                  
+      |---------------------------|                                                  
+      |- deck: CardStack          |                                                  
+      |- waste: CardStack         |                                                  
+      |- foundations: Foundation[]|                                                  
+      |- tableaus: Tableau[]      |                                                  
+      |                           |                                                  
+      |+ resetGame()              |                                                  
+      |+ checkVictory()           |                                                  
+      `---------------------------'                                                  
+                                                                                     
+                                                                                     
+              |  ,-----------------------.   ,--------------------------------------.
+              |  |Foundation             |   |Tableau                               |
+              |  |-----------------------|   |--------------------------------------|
+              |  |- suit: String         |   |- cards: CardStack                    |
+              |  |- cards: CardStack     |   |                                      |
+              |  |                       |   |+ push(card: Card)                    |
+              |  |+ addCard(card: Card)  |   |+ flipTopCard()                       |
+              |  |+ isComplete(): boolean|   |+ canMoveTo(targetCard: Card): boolean|
+              |  `-----------------------'   `--------------------------------------'
+                                                                                     
+   ,---------------------------------.                                               
+   |CardStack                        |                                               
+   |---------------------------------|                                               
+   |- cards: Card[]                  |                                               
+   |                                 |                                               
+   |+ moveCardToTableau()            |                                               
+   |+ moveCardToFoundation()         |                                               
+   |+ shuffleStock()                 |                                               
+   |+ push(card: Card)               |                                               
+   |+ canStackOn(card: Card): boolean|                                               
+   |+ peek(): Card                   |                                               
+   |+ isEmpty(): boolean             |                                               
+   `---------------------------------'                                               
+                    |                                                                
+                                                                                     
+,---------------------------------------.                                            
+|Card                                   |                                            
+|---------------------------------------|                                            
+|- suit: String                         |                                            
+|- value: String | Number               |                                            
+|- isFaceUp: boolean                    |                                            
+|                                       |                                            
+|+ flip()                               |                                            
+|+ canStackOn(targetCard: Card): boolean|                                            
+`---------------------------------------'   
+
+Version 5:
+
+                                                                           ,---------------------------.                                            
+                                                                             |Klondike                   |                                            
+                                                                             |---------------------------|   ,---------------------------------------.
+                                                                             |- Stock: CardStack         |   |Card                                   |
+                                                                             |- Waste: CardStack         |   |---------------------------------------|
+                                                                             |- Foundation: Foundation   |   |- suit: String                         |
+                                                                             |- Foundations: Foundation[]|   |- value: String | Number               |
+                                                                             |- Tableaus: CardStack[]    |   |- isFaceUp: boolean                    |
+                                                                             |- Player: Player           |   |                                       |
+                                                                             |                           |   |+ flip()                               |
+                                                                             |+ resetGame()              |   |+ canStackOn(targetCard: Card): boolean|
+                                                                             |+ checkVictory()           |   `---------------------------------------'
+                                                                             `---------------------------'                                            
+                                                                                                                                                      
+                                                                                                                                                      
+     ,-----------------------.  ,----------------------------------------------.                                                                      
+     |Foundation             |  |Player                                        |                                                                      
+     |-----------------------|  |----------------------------------------------|                                                                      
+     |- suit: String         |  |- name: String                                |   ,-----.   ,-----.   ,-----------.   ,--------.                     
+     |- cards: CardStack     |  |- score: Number                               |   |Stock|   |Waste|   |Foundations|   |Tableaus|                     
+     |                       |  |                                              |   |-----|   |-----|   |-----------|   |--------|                     
+     |+ addCard(card: Card)  |  |+ playCard()                                  |   `-----'   `-----'   `-----------'   `--------'                     
+     |+ isComplete(): boolean|  |+ moveCardToFoundation(foundation: Foundation)|                                                                      
+     `-----------------------'  |+ restartGame()                               |                                                                      
+                 |              `----------------------------------------------'                                                                      
+                 |                                                                                                                                    
+,---------------------------------.                                                                                                                   
+|CardStack                        |                                                                                                                   
+|---------------------------------|                                                                                                                   
+|- cards: Card[]                  |                                                                                                                   
+|                                 |                                                                                                                   
+|+ moveCardToTableau()            |                                                                                                                   
+|+ moveCardToFoundation()         |                                                                                                                   
+|+ shuffleStock()                 |                                                                                                                   
+|+ push(card: Card)               |                                                                                                                   
+|+ canStackOn(card: Card): boolean|                                                                                                                   
+|+ peek(): Card                   |                                                                                                                   
+|+ isEmpty(): boolean             |                                                                                                                   
+`---------------------------------'                                                                                                                   
+
+
+version 4:
+            ,---------------------------.                                                                                       
+            |Klondike                   |                                                                                       
+            |---------------------------|                                                                                       
+            |- stock: CardStack         |                                                                                       
+            |- waste: CardStack         |   ,---------------------------------------.                                           
+            |- foundations: Foundation[]|   |Card                                   |                                           
+            |- tableaus: Tableau[]      |   |---------------------------------------|                                           
+            |- player: Player           |   |- suit: string                         |                                           
+            |                           |   |- value: string | number               |                                           
+            |+ shuffleStock()           |   |- isFaceUp: boolean                    |                                           
+            |+ dealInitialCards()       |   |                                       |                                           
+            |+ drawCardFromStock()      |   |+ flip()                               |                                           
+            |+ moveCardToTableau()      |   |+ canStackOn(targetCard: Card): boolean|                                           
+            |+ moveCardToFoundation()   |   `---------------------------------------'                                           
+            |+ resetGame()              |                                                                                       
+            |+ checkVictory()           |                                                                                       
+            `---------------------------'                                                                                       
+                          |                                                                                                     
+                          |                                                                                                     
+           |  ,-----------------------.   ,----------------------------------------------.   ,---------------------------------.
+           |  |Foundation             |   |Player                                        |   |Tableau                          |
+           |  |-----------------------|   |----------------------------------------------|   |---------------------------------|
+           |  |- suit: string         |   |- name: string                                |   |- cards: CardStack               |
+           |  |- cards: CardStack     |   |- score: number                               |   |                                 |
+           |  |                       |   |                                              |   |+ addCard(card: Card)            |
+           |  |+ addCard(card: Card)  |   |+ playCard()                                  |   |+ removeCard(card: Card)         |
+           |  |+ isComplete(): boolean|   |+ moveCardToFoundation(foundation: Foundation)|   |+ canStackOn(card: Card): boolean|
+           |  `-----------------------'   |+ restartGame()                               |   |+ isTableauEmpty(): boolean      |
+           |                              `----------------------------------------------'   `---------------------------------'
+                                                                                                                                
+,---------------------------------.                                                                                             
+|CardStack                        |                                                                                             
+|---------------------------------|                                                                                             
+|- cards: Card[]                  |                                                                                             
+|                                 |                                                                                             
+|+ push(card: Card)               |                                                                                             
+|+ canStackOn(card: Card): boolean|                                                                                             
+|+ peek(): Card                   |                                                                                             
+|+ isEmpty(): boolean             |                                                                                             
+`---------------------------------'     
+
+version 1:
+                             ,---------------------------.              
+                             |Klondike                   |              
+                             |---------------------------|              
+                             |- Stock: Card[]            |              
+                             |- Waste: Card[]            |              
+                             |- Tableaus: Card[][]       |              
+                             |- Foundation: Foundation   |              
+                             |- Foundations: Foundation[]|              
+                             |                           |              
+                             |+ shuffleStock()           |              
+                             |+ dealInitialCards()       |              
+                             |+ drawCardFromStock()      |              
+                             |+ moveCardToTableau()      |              
+                             |+ moveCardToFoundation()   |              
+                             |+ resetGame()              |              
+                             |+ checkVictory()           |              
+                             `---------------------------'              
+                                                                        
+                                                                        
+                               ,------------------------.               
+                               |Player                  |               
+           ,---------------.   |------------------------|               
+           |Foundation     |   |- name: String          |  ,-----------.
+           |---------------|   |- score: Number         |  |Foundations|
+           |- suit: String |   |                        |  |-----------|
+           |- cards: Card[]|   |+ playCard()            |  `-----------'
+           `---------------'   |+ moveCardToFoundation()|               
+                               |+ restartGame()         |               
+                               `------------------------'               
+                                                                        
+,------------------------.                                              
+|Card                    |                                              
+|------------------------|                                              
+|- suit: String          |                                              
+|- value: String | Number|
+|- isFaceUp: boolean     |                                              
+`------------------------'                                              
