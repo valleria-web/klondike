@@ -1,0 +1,46 @@
+@startuml test
+
+class Klondike {
+  - stock: Card[]
+  - waste: Card[]
+  - tableaus: Tableaus[]
+  - foundations: Foundation[]
+
+  
+  + shuffleStock()
+  + dealInitialCards()
+  + drawCardFromStock()
+  + moveCardToTableau()
+  + moveCardToFoundation()
+  + resetGame()
+  + checkVictory()
+}
+
+class Card {
+  - suit: String
+  - value: String | Number
+  - isFaceUp: boolean
+}
+
+class Foundation {
+  - suit: String
+  - cards: Card[]
+}
+
+class Player {
+  - name: String
+  - score: Number
+  
+  + playCard()
+  + moveCardToFoundation()
+  + restartGame()
+}
+
+Klondike "1" --> "0..*" Card
+Klondike "1" --> "0..1" Foundation
+Klondike "1" --> "0..4" Foundations
+Foundation "1" --> "0..*" Card
+Klondike "1" --> "1" Player
+Player "1" --> "1" Klondike
+
+@enduml

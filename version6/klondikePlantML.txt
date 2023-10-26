@@ -1,0 +1,108 @@
+@startuml
+class Klondike {
+  - deck: CardStack
+  - waste: CardStack
+  - foundations: Foundation[]
+  - tableaus: Tableau[]
+  
+  + resetGame()
+  + checkVictory()
+}
+
+class CardStack {
+  - cards: Card[]
+  
+  + moveCardToTableau()
+  + moveCardToFoundation()
+  + shuffleStock()
+  + push(card: Card)
+  + canStackOn(card: Card): boolean
+  + peek(): Card
+  + isEmpty(): boolean
+}
+
+class Card {
+  - suit: String
+  - value: String
+  - isFaceUp: boolean
+
+  + constructor(suit: String, value: String)
+  + createStandardDeck(): Card[]
+}
+
+
+
+class Foundation {
+  - suit: String
+  - cards: CardStack
+  
+  + addCard(card: Card)
+  + isComplete(): boolean
+}
+
+class Tableau {
+  - cards: CardStack
+  
+  + push(card: Card)
+  + flipTopCard()
+  + canMoveTo(targetCard: Card): boolean
+}
+
+Klondike "1" -- "1" CardStack : deck
+Klondike "1" -- "1" CardStack : waste
+Klondike "1" -- "4" Foundation : foundations
+Klondike "1" -- "7" Tableau : tableaus
+
+Tableau "1" -- "1" CardStack : cards
+Foundation "1" -- "1" CardStack : cards
+CardStack "0..*" -- "0..*" Card : cards
+
+
+@enduml
+       ,---------------------------.                                                  
+       |Klondike                   |                                                  
+       |---------------------------|                                                  
+       |- deck: CardStack          |                                                  
+       |- waste: CardStack         |                                                  
+       |- foundations: Foundation[]|                                                  
+       |- tableaus: Tableau[]      |                                                  
+       |                           |                                                  
+       |+ resetGame()              |                                                  
+       |+ checkVictory()           |                                                  
+       `---------------------------'                                                  
+                                                                                      
+                                                                                      
+               |  ,-----------------------.   ,--------------------------------------.
+               |  |Foundation             |   |Tableau                               |
+               |  |-----------------------|   |--------------------------------------|
+               |  |- suit: String         |   |- cards: CardStack                    |
+               |  |- cards: CardStack     |   |                                      |
+               |  |                       |   |+ push(card: Card)                    |
+               |  |+ addCard(card: Card)  |   |+ flipTopCard()                       |
+               |  |+ isComplete(): boolean|   |+ canMoveTo(targetCard: Card): boolean|
+               |  `-----------------------'   `--------------------------------------'
+                                                                                      
+    ,---------------------------------.                                               
+    |CardStack                        |                                               
+    |---------------------------------|                                               
+    |- cards: Card[]                  |                                               
+    |                                 |                                               
+    |+ moveCardToTableau()            |                                               
+    |+ moveCardToFoundation()         |                                               
+    |+ shuffleStock()                 |                                               
+    |+ push(card: Card)               |                                               
+    |+ canStackOn(card: Card): boolean|                                               
+    |+ peek(): Card                   |                                               
+    |+ isEmpty(): boolean             |                                               
+    `---------------------------------'                                               
+                      |                                                               
+                                                                                      
+,------------------------------------------.                                          
+|Card                                      |                                          
+|------------------------------------------|                                          
+|- suit: String                            |                                          
+|- value: String                           |
+|- isFaceUp: boolean                       |
+|                                          |                                          
+|+ constructor(suit: String, value: String)|                                            
+`------------------------------------------' 
