@@ -1,0 +1,60 @@
+@startuml test
+
+class Klondike {
+  - stock: CardStack[]
+  - waste: CardStack[]
+  - tableaus: Tableaus[]
+  - foundations: Foundation[]
+
+  
+  + shuffleStock()
+  + dealInitialCards()
+  + drawCardFromStock()
+  + moveCardToTableau()
+  + moveCardToFoundation()
+  + resetGame()
+  + checkVictory()
+}
+
+class Card {
+  - suit: String
+  - value: String | Number
+  - isFaceUp: boolean
+}
+
+class CardStack {
+  - suit: String
+  - value: String | Number
+}
+
+class Stock {
+  - suit: String
+  - cards: Card[]
+}
+
+class Foundation {
+  - suit: String
+  - cards: Card[]
+}
+
+class Tableua {
+  - suit: String
+  - cards: Card[]
+}
+
+Klondike "1" --> "1" CardStack
+CardStack "1" --> "52" Card
+Klondike "1" --> "1" Stock
+Stock "1" --> "1" Waste
+Klondike "1" --> "1" Foundation
+Foundation "1" --> "4" Foundations
+Klondike "1" --> "1" Tableua
+Tableua "1" --> "7" Tableuas
+
+note left of Klondike
+  Aplicación de patrones:
+  - Patrón de Comando para las acciones del jugador.
+  - Patrón de Estrategia para las reglas de movimiento.
+  - Patrón de Estado para gestionar los estados del juego.
+end note
+@enduml
