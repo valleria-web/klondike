@@ -1,0 +1,48 @@
+@startuml Klondike_version_3
+class Stock {
+  - cards: List<Card>
+  + Stock()
+}
+
+class Tableau {
+  - tableaus: []
+  + Tableau(stock: Stock)
+  + distributeCards(stock: Stock): void
+}
+
+class Klondike {
+  - stock: Stock
+  - waste: Waste
+  - foundations: Foundation
+  - tableaus: Tableau
+  + Klondike()
+}
+
+class Card {
+  - suit: String
+  - value: String
+  - isFaceUp: boolean
+  + Card(suit: String, value: String, isFaceUp: boolean = false)
+  + flip(): void
+}
+
+class Foundation {
+  - foundations: []
+  + Foundation(stock: Stock)
+}
+
+class Waste {
+  - pile: []
+  + Waste(stock: Stock)
+}
+
+Stock --> "1" Card : Contains
+Tableau -[dotted]-> "1" Stock : Uses
+Klondike *-- Stock : has
+Klondike *-- Waste : has
+Klondike *-- Foundation : has
+Klondike *-- Tableau : has
+Foundation --[dotted]-> "1" Stock : Uses
+Waste --[dotted]-> "1" Stock : Uses
+
+@enduml
