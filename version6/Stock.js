@@ -29,6 +29,7 @@ class Stock {
 export default Stock;
 
 
+
 //DEBUG:
 //const cardstack1 = new Stock();
 //console.log(cardstack1)
