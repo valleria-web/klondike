@@ -1,0 +1,32 @@
+@startuml klondikev7,
+
+class Klondike {
+  - stock: Stock
+  - tableau: Tableau
+  - Foundation: Foundation
+  - Waste: Waste
+}
+
+class Stock {
+  - cards: Array
+}
+
+class Tableau {
+  - tableaus: Array[]
+}
+
+class Foundation {
+  - foundations: Array[]
+}
+
+class Waste {
+  - cards: Array
+}
+
+Klondike "1" --> "1" Stock
+Klondike "1" --> "1" Tableau
+Klondike "1" --> "1" Foundation
+Klondike "1" --> "1" Waste
+
+@enduml
+

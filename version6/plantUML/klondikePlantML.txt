@@ -22,8 +22,8 @@ class CardStack {
 }
 
 class Card {
-  - suit: String
-  - value: String
+  - suit: String[]
+  - value: String[]
   - isFaceUp: boolean
 
   + constructor(suit: String, value: String)

@@ -1,5 +1,5 @@
 //Stock.js
-import Card from './Card.js';
+import Card from "./Card.js";
 
 class Stock {
   constructor() {
@@ -27,8 +27,6 @@ class Stock {
 }
 
 export default Stock;
-
-
 
 //DEBUG:
 //const cardstack1 = new Stock();

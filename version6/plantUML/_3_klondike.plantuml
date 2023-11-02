@@ -1,7 +1,10 @@
 @startuml Klondike_version_3
 class Stock {
-  - cards: List<Card>
+  - cards: deck
+
   + Stock()
+  + createAndShuffleDeck(): deck
+  + shuffleDeck(deck: List<Card>)
 }
 
 class Tableau {
@@ -11,7 +14,8 @@ class Tableau {
 }
 
 class Klondike {
-  - stock: Stock
+  - deck : deck
+  - stock: Stock(deck)
   - waste: Waste
   - foundations: Foundation
   - tableaus: Tableau
@@ -19,8 +23,8 @@ class Klondike {
 }
 
 class Card {
-  - suit: String
-  - value: String
+  - suit: String[]
+  - value: String[]
   - isFaceUp: boolean
   + Card(suit: String, value: String, isFaceUp: boolean = false)
   + flip(): void

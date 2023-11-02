@@ -1,9 +1,8 @@
-import Stock from "./Stock.js"; // Importa la clase Stock
+import Stock from "./Stock.mjs";
 
 class Tableau {
   constructor(stock) {
     this.tableaus = Array.from({ length: 7 }, () => []);
-
     this.distributeCards(stock);
   }
 
@@ -24,10 +23,25 @@ class Tableau {
 
     stock.cards.splice(0, currentCard);
   }
+
+  receiveCards(stock) {
+    for (let i = 0; i < this.tableaus.length; i++) {
+      const tableau = this.tableaus[i];
+      if (tableau.length === i) {
+        const card = stock.cards.shift();
+        tableau.push(card);
+        if (tableau.length === i + 1) {
+          card.isFaceUp = true;
+        }
+      }
+    }
+  }
 }
 
 export default Tableau;
 
-//DEBUG:
-//const stock = new Stock(); 
-//const tableaus = new Tableau(stock); 
+//Debug: 
+//const stock = new Stock();
+//stock.populateStock();
+//const tableau = new Tableau(stock);
+//console.log(tableau.tableaus); 
