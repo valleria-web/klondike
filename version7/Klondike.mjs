@@ -6,8 +6,8 @@ import Tableau from './Tableau.mjs';
 class Klondike {
   constructor() {
     this.stock = new Stock();
-    this.Waste = new Waste(); 
-    this.Foundation = new Foundation();
+    this.waste = new Waste(); 
+    this.foundation = new Foundation();
     this.tableau = new Tableau(this.stock);
   }
 
@@ -26,4 +26,7 @@ export default Klondike;
 const klondikeGame = new Klondike();
 klondikeGame.populateStockInKlondike(); // Llama al método para poblar el mazo desde Klondike
 klondikeGame.distributeCards()  // Llama al método para poblar los tableus desde Klondike
-console.log(klondikeGame);
+console.log(klondikeGame.stock);
+console.log(klondikeGame.waste);
+console.log(klondikeGame.foundation);
+console.log(klondikeGame.tableau.tableaus);

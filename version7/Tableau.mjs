@@ -1,5 +1,3 @@
-import Stock from "./Stock.mjs";
-
 class Tableau {
   constructor(stock) {
     this.tableaus = Array.from({ length: 7 }, () => []);
