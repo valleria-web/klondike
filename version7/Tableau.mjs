@@ -4,6 +4,19 @@ class Tableau {
     this.distributeCards(stock);
   }
 
+  receiveCards(stock) {
+    for (let i = 0; i < this.tableaus.length; i++) {
+      const tableau = this.tableaus[i];
+      if (tableau.length === i) {
+        const card = stock.cards.shift();
+        tableau.push(card);
+        if (tableau.length === i + 1) {
+          card.isFaceUp = true;
+        }
+      }
+    }
+  }
+
   distributeCards(stock) {
     let currentCard = 0;
     for (let i = 0; i < this.tableaus.length; i++) {
@@ -21,25 +34,12 @@ class Tableau {
 
     stock.cards.splice(0, currentCard);
   }
-
-  receiveCards(stock) {
-    for (let i = 0; i < this.tableaus.length; i++) {
-      const tableau = this.tableaus[i];
-      if (tableau.length === i) {
-        const card = stock.cards.shift();
-        tableau.push(card);
-        if (tableau.length === i + 1) {
-          card.isFaceUp = true;
-        }
-      }
-    }
-  }
 }
 
 export default Tableau;
 
-//Debug: 
+//Debug:
 //const stock = new Stock();
 //stock.populateStock();
 //const tableau = new Tableau(stock);
-//console.log(tableau.tableaus); 
+//console.log(tableau.tableaus);

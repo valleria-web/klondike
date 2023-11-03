@@ -1,12 +1,21 @@
 class Card {
+  constructor(value, suit) {
+    this.value = value;
+    this.suit = suit;
+  }
+
+  toString() {
+    return `${this.value} of ${this.suit}`;
+  }
+
   static createAndShuffleDeck() {
     const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-    const values = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
     const deck = [];
 
     for (const suit of suits) {
       for (const value of values) {
-        deck.push({ card: `${value} of ${suit}`, isFaceUp: false });
+        deck.push(new Card(value, suit)); 
       }
     }
 
@@ -20,6 +29,7 @@ class Card {
 }
 
 export default Card;
+
 
 
  

@@ -1,32 +1,51 @@
 @startuml klondikev7,
 
+class Card {
+  - suits: String
+  - values: String
+  - deck: Array[52]
+  + createAndShuffleDeck()
+}
+
 class Klondike {
-  - stock: Stock
-  - tableau: Tableau
-  - Foundation: Foundation
-  - Waste: Waste
+  + stock: new Stock()
+  + tableau: new Tableau(this.stock)
+  + foundation: new Foundation()
+  + waste: new Waste()
 }
 
 class Stock {
-  - cards: Array
+  - cards: Array[Card]
+  + constructor()
+  + populateStock() 
 }
 
 class Tableau {
-  - tableaus: Array[]
+  - tableaus: Array[[7]]
+  + constructor(stock)
+  + receiveCards(stock) 
+  + distributeCards(stock)
 }
 
 class Foundation {
-  - foundations: Array[]
+  - foundations: Array[[4]]
+  + constructor()
+  + moveCardToFoundation()
+  + isMoveValid()
+  + isNextValueInOrder()
 }
 
 class Waste {
-  - cards: Array
+  - cards: Array[{}]
+  + constructor()
+
 }
 
+Stock "1"  -[dotted]-> "*" Card : Uses
 Klondike "1" --> "1" Stock
-Klondike "1" --> "1" Tableau
-Klondike "1" --> "1" Foundation
 Klondike "1" --> "1" Waste
+Klondike "1" --> "1" Foundation
+Klondike "1" --> "1" Tableau
 
 @enduml
 
