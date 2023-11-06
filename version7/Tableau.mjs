@@ -1,7 +1,6 @@
 class Tableau {
-  constructor(stock) {
+  constructor() {
     this.tableaus = Array.from({ length: 7 }, () => []);
-    this.distributeCards(stock);
   }
 
   receiveCards(stock) {
@@ -17,7 +16,7 @@ class Tableau {
     }
   }
 
-  distributeCards(stock) {
+  distributeCardsATableaus(stock) {
     let currentCard = 0;
     for (let i = 0; i < this.tableaus.length; i++) {
       for (let j = 0; j <= i; j++) {
@@ -34,12 +33,68 @@ class Tableau {
 
     stock.cards.splice(0, currentCard);
   }
+
+  canMoveCardToAnotherTableau(cardToMove, destinationTableau) {
+    const topCard = destinationTableau[destinationTableau.length - 1];
+
+    if (
+      (topCard.suit === "Hearts" || topCard.suit === "Diamonds") &&
+      (cardToMove.suit === "Clubs" || cardToMove.suit === "Spades")
+    ) {
+      const values = [
+        "A",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+      ];
+      const topCardValueIndex = values.indexOf(topCard.value);
+      const cardToMoveValueIndex = values.indexOf(cardToMove.value);
+
+      if (cardToMoveValueIndex === topCardValueIndex - 1) {
+        return true;
+      }
+    } else if (
+      (topCard.suit === "Clubs" || topCard.suit === "Spades") &&
+      (cardToMove.suit === "Hearts" || cardToMove.suit === "Diamonds")
+    ) {
+      const values = [
+        "A",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+      ];
+      const topCardValueIndex = values.indexOf(topCard.value);
+      const cardToMoveValueIndex = values.indexOf(cardToMove.value);
+
+      if (cardToMoveValueIndex === topCardValueIndex - 1) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 export default Tableau;
 
 //Debug:
-//const stock = new Stock();
-//stock.populateStock();
-//const tableau = new Tableau(stock);
-//console.log(tableau.tableaus);
+//const tableauTest = new Tableau();
+//console.log(tableauTest);

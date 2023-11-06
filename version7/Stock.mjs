@@ -13,6 +13,6 @@ class Stock {
 export default Stock;
 
 // Debug:
-//const stock = new Stock();
-//stock.populateStock();
-//console.log(stock.cards)
+//const stockTest = new Stock();
+//stockTest.populateStock();
+//console.log(stockTest.cards);

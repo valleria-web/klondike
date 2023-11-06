@@ -4,15 +4,19 @@ class Card {
   - suits: String
   - values: String
   - deck: Array[52]
+  + constructor()
+  + toString()
   + createAndShuffleDeck()
 }
 
 class Klondike {
-  + stock: new Stock()
-  + tableau: new Tableau(this.stock)
-  + foundation: new Foundation()
-  + waste: new Waste()
+  - stock: new Stock()
+  - waste: new Waste()
+  - foundation: new Foundation()
+  - tableau: new Tableau(this.stock)
+  + constructor()
 }
+
 
 class Stock {
   - cards: Array[Card]
@@ -25,23 +29,24 @@ class Tableau {
   + constructor(stock)
   + receiveCards(stock) 
   + distributeCards(stock)
+  + canMoveCardToAnotherTableau(cardToMove, destinationTableau)
 }
 
 class Foundation {
   - foundations: Array[[4]]
   + constructor()
-  + moveCardToFoundation()
-  + isMoveValid()
-  + isNextValueInOrder()
+  + moveCardToFoundation(card, foundationIndex)
+  + isMoveToFoundationValid(card, foundationPile)
+  + isNextValueInFoundationInOrder(currentValue, nextValue)
 }
 
 class Waste {
   - cards: Array[{}]
   + constructor()
-
+  + receiveCardFromStock()
 }
 
-Stock "1"  -[dotted]-> "*" Card : Uses
+Stock "1"  -[dotted]-> "*" Card
 Klondike "1" --> "1" Stock
 Klondike "1" --> "1" Waste
 Klondike "1" --> "1" Foundation
