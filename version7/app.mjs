@@ -4,6 +4,10 @@ class Card {
     this.suit = suit;
   }
 
+  flip() {
+    this.isFaceUp = !this.isFaceUp;
+  }
+
   toString() {
     return `${this.value} of ${this.suit}`;
   }
@@ -163,10 +167,10 @@ class Tableau {
 
     return false;
   }
-};
+}
 
 const tableau = new Tableau();
-tableau.distributeCardsATableaus(stock); // Pasar la baraja (stock) como argumento
+tableau.distributeCardsATableaus(stock);
 console.log(tableau);
 
 const tableauCardsList = document.getElementById("tableauCards");
@@ -180,10 +184,11 @@ function renderTableausCards() {
 
     tableauPile.forEach((card, cardIndex) => {
       const cardElement = document.createElement("span");
-      cardElement.textContent = card.isFaceUp ? `${card.value} of ${card.suit}` : "Face Down";
+      cardElement.textContent = card.isFaceUp
+        ? `${card.value} of ${card.suit}`
+        : "Face Down";
       cardElement.classList.add("card");
 
-      // Add some spacing between each card for visualization purposes
       cardElement.style.marginLeft = `${10 * cardIndex}px`;
 
       tableauElement.appendChild(cardElement);
@@ -195,16 +200,29 @@ function renderTableausCards() {
 
 class Waste {
   constructor() {
-    this.cards = new Array().fill(undefined);
+    this.cards = [];
   }
   receiveCardFromStock(stock) {
     if (stock.cards.length > 0) {
-      const card = stock.cards.pop(); // Extrae la última carta del stock
-      this.cards.push(card); // Agrega la carta al waste
+      const card = stock.cards.pop();
+      if (card instanceof Card) {
+        this.cards.push(card);
+      } else {
+        console.error("Error: El objeto recibido no es una instancia de Card.");
+      }
+    }
+  }
+  flipLastCard() {
+    if (this.cards.length > 0) {
+      const lastCard = this.cards[this.cards.length - 1];
+      if (lastCard instanceof Card) {
+        lastCard.flip();
+      } else {
+        console.error("Error: La última carta no es una instancia de Card.");
+      }
     }
   }
 }
-
 const waste = new Waste();
 waste.receiveCardFromStock(stock);
 console.log(waste);
@@ -214,15 +232,21 @@ const wasteCardsList = document.getElementById("wasteCards");
 function renderWasteCards() {
   wasteCardsList.innerHTML = "";
 
-  waste.cards.forEach((card) => {
+  waste.cards.forEach((card, index) => {
     const cardElement = document.createElement("li");
     cardElement.textContent = `${card.value} of ${card.suit}`;
     cardElement.classList.add("card");
 
+    if (index === waste.cards.length - 1) {
+      cardElement.addEventListener("click", () => {
+        waste.flipLastCard();
+        renderWasteCards();
+      });
+    }
+
     wasteCardsList.appendChild(cardElement);
   });
 }
-
 
 class Foundation {
   constructor() {
@@ -241,44 +265,69 @@ class Foundation {
   }
 
   isMoveToFoundationValid(card, foundationPile) {
-    const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-  
-    if (foundationPile.length === 0 && card.value === 'A') {
+    const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+
+    if (foundationPile.length === 0 && card.value === "A") {
       return true;
     }
-  
+
     const lastCard = foundationPile[foundationPile.length - 1];
-  
+
     if (!lastCard) {
       return false;
     }
-  
-    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
-  
+
+    const values = [
+      "A",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "Jack",
+      "Queen",
+      "King",
+    ];
+
     const currentIndex = values.indexOf(lastCard.value);
     const nextIndex = values.indexOf(card.value);
-  
+
     if (lastCard.suit === card.suit && nextIndex - currentIndex === 1) {
       return true;
     }
-  
+
     return false;
   }
-  
 
   isNextValueInFoundationInOrder(currentValue, nextValue) {
-    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+    const values = [
+      "A",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "Jack",
+      "Queen",
+      "King",
+    ];
     const currentIndex = values.indexOf(currentValue);
     const nextIndex = values.indexOf(nextValue);
     return nextIndex - currentIndex === 1;
   }
 }
 
-
 renderTableausCards();
 renderStockCards();
 renderWasteCards();
-
 
 // DRAG AN DROP TO ISFACEUP:TRUE CARDS
 
@@ -291,20 +340,18 @@ function renderTableausCards() {
 
     tableauPile.forEach((card, cardIndex) => {
       const cardElement = document.createElement("span");
-      cardElement.textContent = card.isFaceUp ? `${card.value} of ${card.suit}` : "Face Down";
+      cardElement.textContent = card.isFaceUp
+        ? `${card.value} of ${card.suit}`
+        : "Face Down";
       cardElement.classList.add("card");
 
-      // Agregar la clase 'draggable' solo a las cartas que están boca arriba
       if (card.isFaceUp) {
         cardElement.classList.add("draggable");
-        cardElement.setAttribute('draggable', 'true');
-        cardElement.addEventListener('dragstart', (e) => {
-          e.dataTransfer.setData('text/plain', card.toString());
+        cardElement.setAttribute("draggable", "true");
+        cardElement.addEventListener("dragstart", (e) => {
+          e.dataTransfer.setData("text/plain", card.toString());
         });
       }
-
-      // Resto del código para añadir las cartas al DOM
-      // ...
 
       tableauElement.appendChild(cardElement);
     });
@@ -313,27 +360,25 @@ function renderTableausCards() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const draggableCards = document.querySelectorAll('.draggable');
+document.addEventListener("DOMContentLoaded", () => {
+  const draggableCards = document.querySelectorAll(".draggable");
 
   draggableCards.forEach((card) => {
-    card.addEventListener('dragstart', (e) => {
-      e.dataTransfer.setData('text/plain', card.textContent);
+    card.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", card.textContent);
     });
   });
 
-  const dropZones = document.querySelectorAll('.tableau-pile');
+  const dropZones = document.querySelectorAll(".tableau-pile");
 
   dropZones.forEach((dropZone) => {
-    dropZone.addEventListener('dragover', (e) => {
+    dropZone.addEventListener("dragover", (e) => {
       e.preventDefault();
     });
 
-    dropZone.addEventListener('drop', (e) => {
+    dropZone.addEventListener("drop", (e) => {
       e.preventDefault();
-      const data = e.dataTransfer.getData('text/plain');
-      // Aquí debes manejar la lógica para mover la carta a la zona de destino
-      // Implementar la lógica para verificar si el movimiento es válido, etc.
+      const data = e.dataTransfer.getData("text/plain");
     });
   });
 });

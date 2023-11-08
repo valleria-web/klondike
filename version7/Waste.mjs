@@ -4,8 +4,14 @@ class Waste {
   }
   receiveCardFromStock(stock) {
     if (stock.cards.length > 0) {
-      const card = stock.cards.pop(); // Extrae la última carta del stock
-      this.cards.push(card); // Agrega la carta al waste
+      const card = stock.cards.pop();
+      this.cards.push(card);
+    }
+  }
+  flipLastCard() {
+    if (this.cards.length > 0) {
+      const lastCard = this.cards[this.cards.length - 1];
+      lastCard.flip(); // Voltea la última carta del Waste
     }
   }
 }
