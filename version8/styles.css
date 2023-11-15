@@ -1,0 +1,20 @@
+/* styles.css */
+.card-list {
+  background: pink;
+  list-style: none;
+  padding: 0;
+}
+
+.card {
+  background: greenyellow;
+  font-size: 12px;
+  display: inline-block;
+  width: 100px;
+  height: 150px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  line-height: 150px;
+
+}
