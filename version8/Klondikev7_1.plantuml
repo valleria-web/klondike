@@ -59,7 +59,6 @@ class Waste {
 
 class WasteRenderer {
   - waste: Waste
-  - wasteCardsList: HTMLElement
   + constructor(waste: Waste)
   + renderWasteCards()
 }
