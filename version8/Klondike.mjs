@@ -20,5 +20,4 @@ export default Klondike;
 //console.log(klondikeGameTeste.waste);
 //console.log(klondikeGameTeste.foundation.foundations);
 //console.log(klondikeGameTeste.tableau.tableaus);
-
-
+//

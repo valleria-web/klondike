@@ -3,6 +3,7 @@
 class Card {
   - suits: String
   - values: String
+  - isFaceUp: Boolean
   - deck: Array[52]
   + constructor()
   + toString()

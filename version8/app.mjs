@@ -59,26 +59,6 @@ class Stock {
 const stock = new Stock();
 stock.populateStock();
 
-
-class StockRenderer {
-  static render(stock) {
-    const stockCardsList = document.getElementById("stockCards");
-    stockCardsList.innerHTML = "";
-
-    stock.cards.forEach((card) => {
-      const cardElement = document.createElement("li");
-      cardElement.textContent = `${card.value} of ${card.suit}`;
-      cardElement.classList.add("card");
-
-      stockCardsList.appendChild(cardElement);
-    });
-  }
-}
-
-StockRenderer.render(stock);
-console.log(stock);
-
-
 class Tableau {
   constructor() {
     this.tableaus = Array.from({ length: 7 }, () => []);
@@ -177,6 +157,7 @@ class Tableau {
 const tableau = new Tableau();
 tableau.distributeCardsATableaus(stock);
 console.log(tableau);
+console.log(stock);
 
 class TableauRenderer {
   constructor(tableau) {
@@ -210,6 +191,21 @@ class TableauRenderer {
 
 const tableauRenderer = new TableauRenderer(tableau);
 tableauRenderer.renderTableausCards();
+
+class StockRenderer {
+  static render(stock) {
+    const stockCardsList = document.getElementById("stockCards");
+    stockCardsList.innerHTML = "";
+
+    stock.cards.forEach((card) => {
+      const cardElement = document.createElement("li");
+      cardElement.textContent = `${card.value} of ${card.suit}`;
+      cardElement.classList.add("card");
+
+      stockCardsList.appendChild(cardElement);
+    });
+  }
+}
 
 class Waste {
   constructor() {
@@ -349,6 +345,8 @@ class Foundation {
     return nextIndex - currentIndex === 1;
   }
 }
+
+StockRenderer.render(stock);
 
 renderTableausCards();
 renderStockCards();

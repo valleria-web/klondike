@@ -1,6 +1,3 @@
-import Stock from "./Stock.mjs";
-
-// Clase o función responsable de la representación visual (vista)
 class StockRenderer {
   static render(stock) {
     const stockCardsList = document.getElementById("stockCards");
