@@ -95,6 +95,3 @@ class Tableau {
 
 export default Tableau;
 
-//Debug:
-//const tableauTest = new Tableau();
-//console.log(tableauTest);

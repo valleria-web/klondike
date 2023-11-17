@@ -1,22 +1,21 @@
 class Waste {
   constructor() {
-    this.cards = new Array().fill(undefined);
+    this.cards = []; 
   }
+
   receiveCardFromStock(stock) {
-    if (stock.cards.length > 0) {
-      const card = stock.cards.pop();
-      this.cards.push(card);
+    if (stock.cards && stock.cards.length > 0) {
+      const lastCardIndex = stock.cards.length - 1;
+      const card = stock.cards[lastCardIndex];
+      stock.cards.splice(lastCardIndex, 1); 
+      this.cards.push(card); 
     }
   }
   flipLastCard() {
     if (this.cards.length > 0) {
       const lastCard = this.cards[this.cards.length - 1];
-      lastCard.flip(); // Voltea la última carta del Waste
+      lastCard.flip(); 
     }
   }
 }
 export default Waste;
-
-// Debug:
-//const waste1 = new Waste();
-//console.log(waste1);

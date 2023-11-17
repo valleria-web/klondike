@@ -1,7 +1,8 @@
-class WasteRenderer {
+class WasteView {
   constructor(waste) {
     this.waste = waste;
     this.wasteCardsList = document.getElementById("wasteCards");
+    this.renderWasteCards(); 
   }
 
   renderWasteCards() {
@@ -11,22 +12,17 @@ class WasteRenderer {
       const cardElement = document.createElement("li");
       cardElement.textContent = `${card.value} of ${card.suit}`;
       cardElement.classList.add("card");
-      cardElement.id = `wasteCard_${index}`; // Unique ID for each card
+      cardElement.id = `wasteCard_${index}`;
 
       this.wasteCardsList.appendChild(cardElement);
     });
   }
+
+
+  updateView() {
+    this.renderWasteCards(); 
+  }
 }
 
+export default WasteView;
 
-//DEBUG:
-/*
-const waste = new Waste();
-waste.receiveCardFromStock(stock);
-console.log(waste);
-
-const wasteRenderer = new WasteRenderer(waste);
-const wasteController = new WasteController(waste, wasteRenderer);
-wasteRenderer.renderWasteCards();
-
-*/

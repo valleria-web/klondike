@@ -1,6 +1,23 @@
 class WasteController {
-  constructor(waste, wasteRenderer) {
+  constructor(waste) {
     this.waste = waste;
-    this.wasteRenderer = wasteRenderer;
-  } 
+    this.subscribers = []; 
+  }
+
+  subscribe(subscriber) {
+    this.subscribers.push(subscriber);
+  }
+
+  receiveCardFromStock(card) {
+    this.waste.receiveCardFromStock(card);
+    this.notifySubscribers(); 
+  }
+
+  notifySubscribers() {
+    this.subscribers.forEach(subscriber => {
+      subscriber.updateView(); 
+    });
+  }
 }
+
+export default WasteController;

@@ -1,4 +1,4 @@
-class TableauRenderer {
+class TableauView {
   constructor(tableau) {
     this.tableau = tableau;
   }
@@ -28,12 +28,4 @@ class TableauRenderer {
   }
 }
 
-//DEBUG:
-/*
-const tableau = new Tableau();
-tableau.distributeCardsATableaus(stock);
-console.log(tableau);
-
-const tableauRenderer = new TableauRenderer(tableau);
-tableauRenderer.renderTableausCards(); // Renderiza el tableau visualmente
-*/
+export default TableauView;

@@ -16,6 +16,8 @@ class Klondike {
   - waste: Waste
   - foundation: Foundation
   - tableau: Tableau
+  - stockController: StockController
+  - wasteController: WasteController
   + constructor()
 }
 
@@ -64,10 +66,28 @@ class WasteRenderer {
   + renderWasteCards()
 }
 
+class StockController {
+  - stock: Stock
+  - stockView: StockRenderer
+  - wasteController: WasteController
+  + constructor(stock: Stock, stockView: StockRenderer, wasteController: WasteController)
+  + handleStockClick(event)
+  + moveCardToWaste()
+}
+
+class WasteController {
+  - waste: Waste
+  - wasteView: WasteRenderer
+  + constructor(waste: Waste, wasteView: WasteRenderer)
+  + receiveCardFromStock(card: Card)
+}
+
 Klondike "1" --> "1" Stock
 Klondike "1" --> "1" Waste
 Klondike "1" --> "1" Foundation
 Klondike "1" --> "1" Tableau
+Klondike "1" --> "1" StockController
+Klondike "1" --> "1" WasteController
 Stock "1" *-- "*" Card
 Waste "1" *-- "*" Card
 Foundation "1" *-- "*" Card
@@ -75,5 +95,10 @@ Tableau "1" *-- "*" Card
 StockRenderer ..> Stock : uses
 TableauRenderer ..> Tableau : uses
 WasteRenderer ..> Waste : uses
+StockController ..> Stock : controls
+StockController ..> StockRenderer : controls
+StockController ..> WasteController : controls
+WasteController ..> Waste : controls
+WasteController ..> WasteRenderer : controls
 
 @enduml
