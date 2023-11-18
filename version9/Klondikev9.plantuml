@@ -1,0 +1,102 @@
+@startuml klondike_v9
+
+class Card {
+  - suits: String
+  - values: String
+  - isFaceUp: Boolean
+  - deck: Array[52]
+  + constructor()
+  + toString()
+  + flip()
+  + createAndShuffleDeck()
+}
+
+class Klondike {
+  - stock: Stock
+  - waste: Waste
+  - foundation: Foundation
+  - tableau: Tableau
+  + constructor()
+}
+
+class Stock {
+  - cards: Array[Card]
+  + constructor()
+  + populateStock() 
+}
+
+class StockController {
+  - stock: Stock
+  - stockView: StockRenderer
+  - waste: Waste
+  + constructor(stock: Stock, stockView: StockView, waste: Waste)
+  + handleStockClick(event)
+  + moveCardToWaste()
+  + updateStockView(newStockData)
+}
+
+class stockView {
+  + static render(stock: Stock)
+}
+
+
+class Tableau {
+  - tableaus: Array[[7]]
+  + constructor(stock: Stock)
+  + receiveCards(stock: Stock) 
+  + distributeCards(stock: Stock)
+  + canMoveCardToAnotherTableau(cardToMove: Card, destinationTableau: Tableau)
+}
+
+class TableauView {
+  - tableau: Tableau
+  + constructor(tableau: Tableau)
+  + renderTableausCards()
+}
+
+class Foundation {
+  - foundations: Array[[4]]
+  + constructor()
+  + moveCardToFoundation(card: Card, foundationIndex)
+  + isMoveToFoundationValid(card: Card, foundationPile)
+  + isNextValueInFoundationInOrder(currentValue, nextValue)
+}
+
+class Waste {
+  - cards: Array[Card]
+  + constructor()
+  + receiveCard()
+  + flipLastCard()
+}
+
+class WasteView {
+  - waste: Waste
+  + constructor(waste: Waste)
+  + renderWasteCards()
+}
+
+class WasteController {
+  - waste: Waste
+  - wasteView: WasteRenderer
+  + constructor(waste: Waste, wasteView: WasteRenderer)
+  + receiveCardFromStock(card: Card)
+}
+
+Klondike "1" --> "1" Stock
+Klondike "1" --> "1" Waste
+Klondike "1" --> "1" Foundation
+Klondike "1" --> "1" Tableau
+Stock "1" *-- "*" Card
+Waste "1" *-- "*" Card
+Foundation "1" *-- "*" Card
+Tableau "1" *-- "*" Card
+StockView ..> Stock : uses
+TableaukView ..> Tableau : uses
+WasteView ..> Waste : uses
+StockController ..> Stock : controls
+StockController ..> StockView : controls
+StockController ..> Waste : controls
+WasteController ..> Waste : controls
+WasteController ..> WasteView : controls
+
+@enduml
